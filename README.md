@@ -1,10 +1,10 @@
 ### 유저
 - 게시판에 글을 수정하거나 삭제할 때 유저 인증이 필요하여 회원가입, 로그인 기능 구현
-#### 회원가입(signup)
-- request로 'name', 'email', 'password'를 받는다.
+#### 회원가입 (signup)
+- request로 name, email, password를 받는다.
 - 이메일 이미 존재할 시 `EMAIL_ALREADY_EXISTS` 에러 반환
 - 아이디, 비밀번호 정규표현식을 이용하여 형식 지정
-    - 아이디 `@`와 '.' 필수 포함
+    - 아이디 `@`와 `.` 필수 포함
     - 패스워드 8자리 이상, 영문&숫자 필수 포함, 특수문자 가능
     - 아이디, 패드워드 정규식 형식과 일치하지 않을 시 `EMAIL_FORMAT_ERROR`, `PASSWORD_FORMAT_ERROR` 에러 반환
 - 패스워드 bcrypt를 이용하여 암호화
@@ -12,8 +12,8 @@
 - 키 에러 발생 시 `KEY_ERROR` 에러 반환
 - 디코드 에러 발생 시 `JSONDecodeError` 에러 반환
 
-#### 로그인(login)
-- request로 'email', 'password'를 받는다.
+#### 로그인 (login)
+- request로 email, password를 받는다.
 - request email과 일치하는 user를 찾는다.
     - db에 request email과 일치하는 email이 없을 시  `EMAIL_DOES_NOT_EXISTS` 에러 반환
 - request password와 db에 저장되어 있는 암호화된 패스워드를 비교한다.
@@ -25,13 +25,18 @@
 
 #### endpoint
 유저 회원가입 : http://localhost:8000/users/signin
+
 유저 로그인 : http://localhost:8000/users/login
 
 ### 포스팅
 
 #### endpoint
 글 작성 : http://localhost:8000/post
+
 글 확인 : http://localhost:8000/user/{user_id}
+
 글 목록 확인 : http://localhost:8000/posts
+
 글 수정 : http://localhost:8000/post (쿼리?)
+
 글 삭제 : http://localhost:8000/post (쿼리?)
