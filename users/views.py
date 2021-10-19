@@ -15,7 +15,6 @@ class SignupView(View):
                 return JsonResponse({'message':'EMAIL_ALREADY_EXISTS'}, status=400)
             
             EMAIL_VALIDATION    = re.compile('[a-z0-9-_.]+@[a-z]+\.[a-z]')
-            # 패스워드 8자리 이상, 영문&숫자 필수 포함, 특수문자 가능
             PASSWORD_VALIDATION = re.compile('(?=.{8,})(?=.*[a-zA-Z!@#$%^&*()_+~])(?=.*[!@#$%^&*()_+~0-9]).*')
 
             if not EMAIL_VALIDATION.match(data['email']):
@@ -66,9 +65,6 @@ class LoginView(View):
         
         except json.decoder.JSONDecodeError:
             return JsonResponse({'message':'JSONDecodeError'}, status=400)
-
-        except User.DoesNotExist:
-            return JsonResponse({'message':'USER_DOES_NOT_EXISTS'}, status=400)
 
         except User.MultipleObjectsReturned:
             return JsonResponse({'MESSAGE':'MUTIPLE_OBJECTS_RETURNED'}, status=400)
