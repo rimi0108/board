@@ -8,7 +8,7 @@ from utils           import log_in_confirm
 from users.models    import User
 from postings.models import Posting
 
-class PostingView(View):
+class UserPostView(View):
     @log_in_confirm
     def post(self, request):
         try:
@@ -50,4 +50,18 @@ class PostingView(View):
         } for post in posts]
         
         return JsonResponse({'MY_POST_LIST' : results}, status=200)
+    
+class PostView(View):
+    def get(self, request):
+        
+        posts = Posting.objects.all()
+        
+        results = [{
+            'id'        : post.id,
+            'content'   : post.content,
+            'image_url' : post.image_url,
+            'user_name' : post.user_id.name
+        } for post in posts]
+        
+        return JsonResponse({'POST_LIST' : results}, status=200)
         

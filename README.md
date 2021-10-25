@@ -51,13 +51,15 @@ Django를 이용한 게시판 CRUD api 구현
 - 유저의 id를 db에서 확인하여 유저가 작성한 글 목록을 확인한다.
 
 ### 글 목록 확인 (read)
+- 전체 글 목록을 불러온다.
+- 글 목록 하나 하나 딕셔너리 형태로 출력한다.
 
 ### 글 수정 (update)
 
 ### 글 삭제 (delete)
 
 ### endpoint
-글 작성 : http://localhost:8000/post
+글 작성 : http://localhost:8000/post/{user_id}
 
 글 확인 : http://localhost:8000/post/{user_id}
 
