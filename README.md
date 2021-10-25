@@ -59,7 +59,7 @@ Django를 이용한 게시판 CRUD api 구현
 ### endpoint
 글 작성 : http://localhost:8000/post
 
-글 확인 : http://localhost:8000/user/{user_id}
+글 확인 : http://localhost:8000/post/{user_id}
 
 글 목록 확인 : http://localhost:8000/posts
 

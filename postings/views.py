@@ -33,13 +33,14 @@ class PostingView(View):
             return JsonResponse({'message':'KEY_ERROR'}, status=400)
     
     @log_in_confirm
-    def get(self, request):
-        user = request.user
+    def get(self, request, user_id):
         
-        if not Posting.objects.filter(user_id=user.id).exists():
+        if not Posting.objects.filter(user_id=user_id).exists():
             return JsonResponse({'message':'POST_DOES_NOT_EXISTS'}, status=400)
         
-        posts = Posting.objects.filter(user_id=user.id)
+        user = User.objects.get(id=user_id)
+        
+        posts = Posting.objects.filter(user_id=user_id)
         
         results = [{
             'id'        : post.id,
