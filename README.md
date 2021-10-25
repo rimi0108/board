@@ -38,9 +38,23 @@ Django를 이용한 게시판 CRUD api 구현
 #### 유저 권한 확인
 - 글 작성 전 utils 파일에 있는 log_in_confirm 함수를 decorator로 사용하여 유저의 권한을 확인한다.
 - token을 decode하여 user의 id값을 가져와 user를 불러온다.
-
+#### 권한 확인 후 글 작성
 - 사용자가 글 내용(content)를 입력하지 않았을 시 `EMPTY_CONTENT` 에러를 반환한다.
 - 글 내용, 이미지 url을 사용자에게 받아 글을 생성한다.
+
+### 글 확인 (read)
+#### 유저 권한 확인
+- 내가 작성한 글 목록을 보기 위해 유저 권한 확인이 필요하다.
+- 글 작성과 같이 decorator를 이용하여 유저 권한을 확인한다. 
+#### 권한 확인 후 작성한 글 목록 확인
+- 유저가 작성한 글이 존재하지 않는 경우 `POST_DOES_NOT_EXISTS` 에러를 반환한다.
+- 유저의 id를 db에서 확인하여 유저가 작성한 글 목록을 확인한다.
+
+### 글 목록 확인 (read)
+
+### 글 수정 (update)
+
+### 글 삭제 (delete)
 
 ### endpoint
 글 작성 : http://localhost:8000/post

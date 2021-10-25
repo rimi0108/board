@@ -31,3 +31,22 @@ class PostingView(View):
         
         except KeyError:
             return JsonResponse({'message':'KEY_ERROR'}, status=400)
+    
+    @log_in_confirm
+    def get(self, request):
+        user = request.user
+        
+        if not Posting.objects.filter(user_id=user.id).exists():
+            return JsonResponse({'message':'POST_DOES_NOT_EXISTS'}, status=400)
+        
+        posts = Posting.objects.filter(user_id=user.id)
+        
+        results = [{
+            'id'        : post.id,
+            'content'   : post.content,
+            'image_url' : post.image_url,
+            'user_name' : user.name
+        } for post in posts]
+        
+        return JsonResponse({'MY_POST_LIST' : results}, status=200)
+        
