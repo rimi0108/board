@@ -3,6 +3,7 @@ from json.decoder import JSONDecodeError
 
 from django.http.response import JsonResponse 
 from django.views         import View
+from django.core.paginator import Paginator, EmptyPage
 
 from utils           import log_in_confirm
 from users.models    import User
@@ -32,7 +33,6 @@ class UserPostView(View):
         except KeyError:
             return JsonResponse({'message':'KEY_ERROR'}, status=400)
     
-    @log_in_confirm
     def get(self, request, user_id):
         
         if not Posting.objects.filter(user_id=user_id).exists():
@@ -40,7 +40,16 @@ class UserPostView(View):
         
         user = User.objects.get(id=user_id)
         
-        posts = Posting.objects.filter(user_id=user_id)
+        all_posts = Posting.objects.filter(user_id=user_id)
+        
+        paginator = Paginator(all_posts, 4)
+    
+        page_number = request.GET.get('page', 1)
+        
+        try:
+            posts = paginator.page(page_number)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
         
         results = [{
             'id'        : post.id,
@@ -49,19 +58,49 @@ class UserPostView(View):
             'user_name' : user.name
         } for post in posts]
         
-        return JsonResponse({'MY_POST_LIST' : results}, status=200)
+        return JsonResponse({'MY_POST_LIST' : results, 'page':page_number}, status=200)    
     
 class PostView(View):
     def get(self, request):
+        all_posts = Posting.objects.all().order_by('id')
+
+        paginator = Paginator(all_posts, 4)
         
-        posts = Posting.objects.all()
+        page_number = request.GET.get('page', 1)
         
+        try:
+            posts = paginator.page(page_number)
+        except EmptyPage:
+                posts = paginator.page(paginator.num_pages)
+
         results = [{
             'id'        : post.id,
             'content'   : post.content,
             'image_url' : post.image_url,
             'user_name' : post.user_id.name
         } for post in posts]
+
+        return JsonResponse({'POST_LIST' : results,'page': page_number}, status=200)
+    
+class PostModifyView(View):
+    @log_in_confirm
+    def post(self, request, post_id):
         
-        return JsonResponse({'POST_LIST' : results}, status=200)
+        print(post_id)
+        data = request.POST
         
+        user = request.user
+        
+        if not Posting.objects.filter(id=post_id, user_id=request.user.id).exists():
+            return JsonResponse({'message':'NO_PERMISSION_TO_UPDATE'}, status=400)
+        
+        post = Posting.objects.filter(id=post_id, user_id=request.user)
+        
+        post.update(
+             content = data.get('content'),
+             image_url = data.get('image_url'),
+             user_id = user
+         )
+        
+        post.save()
+        return JsonResponse({'message':'UPDATE_SUCCESS'}, status=201)

@@ -31,8 +31,11 @@ Django를 이용한 게시판 CRUD api 구현
 
 유저 로그인 : http://localhost:8000/users/login
 
+### api 명세
+
 ## 포스팅
-- 유저 로그인 후 글 작성, 글 확인, 글 목록 확인, 글 수정, 글 삭제 기능 구현
+- 유저 로그인 후 글 작성, 글 확인, 글 수정, 글 삭제 기능 구현
+- 로그인 하지 않은 유저는 전체 글 확인 가능
 
 ### 글 작성 (create)
 #### 유저 권한 확인
@@ -43,28 +46,29 @@ Django를 이용한 게시판 CRUD api 구현
 - 글 내용, 이미지 url을 사용자에게 받아 글을 생성한다.
 
 ### 글 확인 (read)
-#### 유저 권한 확인
-- 내가 작성한 글 목록을 보기 위해 유저 권한 확인이 필요하다.
-- 글 작성과 같이 decorator를 이용하여 유저 권한을 확인한다. 
-#### 권한 확인 후 작성한 글 목록 확인
+- page를 쿼리로 받는다.
+- 한 페이지에 4개의 글씩 출력한다.
+- 존재하지 않는 페이지 접속 시 첫번째 페이지로 이동한다.
 - 유저가 작성한 글이 존재하지 않는 경우 `POST_DOES_NOT_EXISTS` 에러를 반환한다.
 - 유저의 id를 db에서 확인하여 유저가 작성한 글 목록을 확인한다.
-
-### 글 목록 확인 (read)
-- 전체 글 목록을 불러온다.
-- 글 목록 하나 하나 딕셔너리 형태로 출력한다.
 
 ### 글 수정 (update)
 
 ### 글 삭제 (delete)
 
+### 글 목록 확인 (read)
+- 한 페이지에 4개의 글 출력
+- 존재하지 않는 페이지 요청 시 첫번째 페이지 글 출력
+
 ### endpoint
-글 작성 : http://localhost:8000/post/{user_id}
+글 작성 : http://localhost:8000/post
 
-글 확인 : http://localhost:8000/post/{user_id}
+글 확인 : http://localhost:8000/post?page={page}
 
-글 목록 확인 : http://localhost:8000/posts
+글 목록 확인 : http://localhost:8000/posts?page={page}
 
-글 수정 : http://localhost:8000/post (쿼리?)
+글 수정 : http://localhost:8000/post?post_id={post_id}
 
-글 삭제 : http://localhost:8000/post (쿼리?)
+글 삭제 : http://localhost:8000/post?post_id={post_id}
+
+### api 명세
