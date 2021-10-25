@@ -8,7 +8,7 @@ from my_settings  import SECRET_KEY, ALGORITHM
 def log_in_confirm(func):
     def wrapper(self, request, *args, **kwargs):
         try:
-            user_token = request.header.get('Authorization')
+            user_token = request.headers.get('Authorization', None)
             
             user = jwt.decode(user_token, SECRET_KEY, ALGORITHM)
 
