@@ -4,6 +4,11 @@ Django를 이용한 게시판 CRUD api 구현
 ## 프로젝트 ERD
 ![board_erd](https://user-images.githubusercontent.com/73830753/138736778-f69e25a6-72d6-42a9-bd79-9f48625ffb97.png)
 
+## 서버 실행 방법
+```
+python manage.py runserver
+```
+
 ## 유저
 - 게시판에 글을 수정하거나 삭제할 때 유저 인증이 필요하여 회원가입, 로그인 기능 구현
 ### 회원가입 (signup)
