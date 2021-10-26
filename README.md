@@ -81,5 +81,5 @@ Django를 이용한 게시판 CRUD api 구현
 ![update](https://user-images.githubusercontent.com/73830753/138815385-0b2ff25e-0096-48e7-ab92-a43263db4629.png)
 ![update_결과](https://user-images.githubusercontent.com/73830753/138815459-6ee2bb8c-945c-4271-95f1-ce8a4ac3994b.png)
 
-글 삭제 : http://localhost:8000/post?post_id={post_id}
+글 삭제 : http://localhost:8000/delete/{post_id}
 ![delete](https://user-images.githubusercontent.com/73830753/138817826-8c6874e9-0a3f-45a5-a816-9c1161084f7f.png)
