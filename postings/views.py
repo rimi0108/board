@@ -84,23 +84,17 @@ class PostView(View):
     
 class PostModifyView(View):
     @log_in_confirm
-    def post(self, request, post_id):
-        
-        print(post_id)
-        data = request.POST
-        
-        user = request.user
+    def get(self, request, post_id):     
         
         if not Posting.objects.filter(id=post_id, user_id=request.user.id).exists():
             return JsonResponse({'message':'NO_PERMISSION_TO_UPDATE'}, status=400)
         
-        post = Posting.objects.filter(id=post_id, user_id=request.user)
+        post = Posting.objects.get(id=post_id, user_id=request.user)
         
-        post.update(
-             content = data.get('content'),
-             image_url = data.get('image_url'),
-             user_id = user
-         )
-        
+        content = request.GET.get('content', '')
+        post.content = content
+        image_url = request.GET.get('image_url', '')
+        post.image_url = image_url
         post.save()
+        
         return JsonResponse({'message':'UPDATE_SUCCESS'}, status=201)

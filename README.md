@@ -1,6 +1,9 @@
 # 💁‍♀️ 프로젝트 개요
 Django를 이용한 게시판 CRUD api 구현
 
+## 프로젝트 ERD
+![board_erd](https://user-images.githubusercontent.com/73830753/138736778-f69e25a6-72d6-42a9-bd79-9f48625ffb97.png)
+
 ## 유저
 - 게시판에 글을 수정하거나 삭제할 때 유저 인증이 필요하여 회원가입, 로그인 기능 구현
 ### 회원가입 (signup)
@@ -53,6 +56,9 @@ Django를 이용한 게시판 CRUD api 구현
 - 유저의 id를 db에서 확인하여 유저가 작성한 글 목록을 확인한다.
 
 ### 글 수정 (update)
+- 쿼리 파라미터를 통해 수정할 글 내용과 이미지 url을 받는다.
+- 만약 비어있다면 ''를 반환한다.
+- user와 post_id가 일치하지 않는다면 `NO_PERMISSION_TO_UPDATE` 에러를 반환한다.
 
 ### 글 삭제 (delete)
 
