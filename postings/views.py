@@ -86,7 +86,7 @@ class PostModifyView(View):
     @log_in_confirm
     def get(self, request, post_id):     
         
-        if not Posting.objects.filter(id=post_id, user_id=request.user.id).exists():
+        if not Posting.objects.filter(id=post_id, user_id=request.user).exists():
             return JsonResponse({'message':'NO_PERMISSION_TO_UPDATE'}, status=400)
         
         post = Posting.objects.get(id=post_id, user_id=request.user)
@@ -98,3 +98,14 @@ class PostModifyView(View):
         post.save()
         
         return JsonResponse({'message':'UPDATE_SUCCESS'}, status=201)
+  
+    @log_in_confirm
+    def delete(self, request, post_id):
+        
+        if not Posting.objects.filter(id=post_id, user_id=request.user).exists():
+             return JsonResponse({'message':'NO_PERMISSION_TO_DELETE'}, status=400)
+        
+        Posting.objects.get(id=post_id, user_id=request.user).delete()
+        
+        return JsonResponse({'message':'DELETE_SUCCESS'}, status=200)
+        

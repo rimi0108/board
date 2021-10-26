@@ -31,10 +31,11 @@ Django를 이용한 게시판 CRUD api 구현
 
 ### endpoint
 유저 회원가입 : http://localhost:8000/users/signin
+![signup](https://user-images.githubusercontent.com/73830753/138814642-4c282c06-7f0e-457e-b78a-87cac0cf2c01.png)
 
 유저 로그인 : http://localhost:8000/users/login
+![login](https://user-images.githubusercontent.com/73830753/138814637-a6984e2a-8e83-44fa-86d8-14a97e0202b1.png)
 
-### api 명세
 
 ## 포스팅
 - 유저 로그인 후 글 작성, 글 확인, 글 수정, 글 삭제 기능 구현
@@ -68,13 +69,16 @@ Django를 이용한 게시판 CRUD api 구현
 
 ### endpoint
 글 작성 : http://localhost:8000/post
+![post](https://user-images.githubusercontent.com/73830753/138814951-8edde119-36e9-4eba-9073-3e7642139527.png)
 
 글 확인 : http://localhost:8000/post?page={page}
+![my_post_list](https://user-images.githubusercontent.com/73830753/138815067-0078e5d2-83e6-4e35-85bc-7d9142e42da8.png)
 
 글 목록 확인 : http://localhost:8000/posts?page={page}
+![post_list](https://user-images.githubusercontent.com/73830753/138815192-f2580617-fd22-44db-bf00-a6b67a157968.png)
 
-글 수정 : http://localhost:8000/post?post_id={post_id}
+글 수정 : http://localhost:8000/update/{post_id}?content={content}&image_url={image_url}
+![update](https://user-images.githubusercontent.com/73830753/138815385-0b2ff25e-0096-48e7-ab92-a43263db4629.png)
+![update_결과](https://user-images.githubusercontent.com/73830753/138815459-6ee2bb8c-945c-4271-95f1-ce8a4ac3994b.png)
 
 글 삭제 : http://localhost:8000/post?post_id={post_id}
-
-### api 명세
