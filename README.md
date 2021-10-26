@@ -57,11 +57,15 @@ Django를 이용한 게시판 CRUD api 구현
 - 유저의 id를 db에서 확인하여 유저가 작성한 글 목록을 확인한다.
 
 ### 글 수정 (update)
+- decorator로 유저 권한을 확인한다.
 - 쿼리 파라미터를 통해 수정할 글 내용과 이미지 url을 받는다.
 - 만약 비어있다면 ''를 반환한다.
 - user와 post_id가 일치하지 않는다면 `NO_PERMISSION_TO_UPDATE` 에러를 반환한다.
 
 ### 글 삭제 (delete)
+- decorator로 유저 권한을 확인한다.
+- user와 post_id에 일치하는 글을 삭제한다.
+- user와 post_id가 일치하지 않는다면 `NO_PERMISSION_TO_UPDATE` 에러를 반환한다.
 
 ### 글 목록 확인 (read)
 - 한 페이지에 4개의 글 출력
