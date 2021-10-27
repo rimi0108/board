@@ -43,7 +43,6 @@ class UserPostView(View):
         all_posts = Posting.objects.filter(user_id=user_id)
         
         paginator = Paginator(all_posts, 4)
-    
         page_number = request.GET.get('page', 1)
         
         try:
@@ -71,7 +70,7 @@ class PostView(View):
         try:
             posts = paginator.page(page_number)
         except EmptyPage:
-                posts = paginator.page(paginator.num_pages)
+            posts = paginator.page(paginator.num_pages)
 
         results = [{
             'id'        : post.id,
