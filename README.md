@@ -70,7 +70,7 @@ python manage.py runserver
 ### 글 삭제 (delete)
 - decorator로 유저 권한을 확인한다.
 - user와 post_id에 일치하는 글을 삭제한다.
-- user와 post_id가 일치하지 않는다면 `NO_PERMISSION_TO_UPDATE` 에러를 반환한다.
+- user와 post_id가 일치하지 않는다면 `NO_PERMISSION_TO_DELETE` 에러를 반환한다.
 
 ### 글 목록 확인 (read)
 - 한 페이지에 4개의 글 출력
