@@ -42,7 +42,7 @@ class UserPostView(View):
         
         all_posts = Posting.objects.filter(user_id=user_id)
         
-        paginator = Paginator(all_posts, 4)
+        paginator   = Paginator(all_posts, 4)
         page_number = request.GET.get('page', 1)
         
         try:
@@ -63,8 +63,7 @@ class PostView(View):
     def get(self, request):
         all_posts = Posting.objects.all().order_by('id')
 
-        paginator = Paginator(all_posts, 4)
-        
+        paginator   = Paginator(all_posts, 4)
         page_number = request.GET.get('page', 1)
         
         try:
@@ -90,9 +89,9 @@ class PostModifyView(View):
         
         post = Posting.objects.get(id=post_id, user_id=request.user)
         
-        content = request.GET.get('content', '')
-        post.content = content
-        image_url = request.GET.get('image_url', '')
+        content        = request.GET.get('content', '')
+        post.content   = content
+        image_url      = request.GET.get('image_url', '')
         post.image_url = image_url
         post.save()
         
